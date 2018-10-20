@@ -7,4 +7,4 @@ Here you will learn how to set up repositorys, open a new branch, add commits an
 
 You will also learn how to to pull requests, create forks and all that funny stuff.
 
-Under Issues you can find new tasks but I think Projects is also really helpful and maybe issues is just helpful for really short term tasks?
+In Issues and Projects you can find some of my ad-hoc ideas on how it would be beneficial to set up projects.
