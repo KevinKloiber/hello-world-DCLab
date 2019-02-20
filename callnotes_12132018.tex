@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[legalpaper, margin=1in]{geometry}
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\usepackage{ifxetex,ifluatex}
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{english}
+  \usepackage{fontspec}
+\else\ifluatex
+  \usepackage{polyglossia}
+  \setmainlanguage{english}
+  \usepackage{fontspec}
+\else
+  \usepackage[english]{babel}
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\fi\fi
+
+\usepackage[
+  hashEnumerators,
+  definitionLists,
+  footnotes,
+  inlineFootnotes,
+  smartEllipses,
+  fencedCode,
+  contentBlocks
+]{markdown}
+
+\begin{document}
+\title{Balance on CPT/ICD in ambulance claims}
+\section{Balance on CPT/ICD in ambulance claims}
+
+\begin{itemize}
+    \item Diagnosis codes found in the ambulance claims.
+    \item 17.17 \% of the ambulance ICD codes at the 3 digit level are equal to the diagnosis code we have in the main dataset, 82.83 \% are not.
+    \item Regression of ```y\_mortality\_28``` on ambulance ICD code dummies, absorbing ambulance FE.
+    \item Binscatter of predicted mortality and residualized ambulance instrument (lova)
+    \end{itemize}
+    \includegraphics{49673907-fa4e4400-fa24-11e8-9e47-8dfc61811d85.png}
+\begin{itemize}
+    \item Plot of y\_hat for ambulance ICD codes, absorbing ambulance FE, and 28-Day actual mortality on instrument controlling for our new x1.
+    \end{itemize}
+    \includegraphics{binscatter.png}
+    \newpage
+\section{Analysis of Differences in ICD codes}
+
+Quick analysis to describe what are the top 30 ICDs that are used as ambulance ICDs but are not in the main dataset
+  \begin{markdown}
+
+  diag3_ambul |
+         ance |      Freq.     Percent        Cum.
+
+          786 |    141,539       22.41       22.41
+          780 |    132,795       21.02       43.43
+          959 |     31,465        4.98       48.41
+          789 |     31,140        4.93       53.34
+          719 |     19,653        3.11       56.45
+          787 |     17,877        2.83       59.28
+          729 |     11,818        1.87       61.15
+          724 |     11,442        1.81       62.96
+          436 |     11,022        1.74       64.71
+          427 |     10,205        1.62       66.32
+
+\end{markdown}
+\begin{markdown}
+
+Here is the list in english:
+
+    1. Dyspnea and respiratory abnormalities
+    2. General symptoms
+    3. Other and unspecified injury to head face and neck
+    4. Abdonimal pain / Other symptoms involving abdomen and pelvis
+    5. Palindromic rheumatism 
+    6. Dysphagia
+    7. Nontraumatic compartment syndrome / swelling of limb
+    8. Other and unspecified disorders of back
+    9. Acute, but ill-defined, cerebrovascular disease
+    10. Other specified cardiac dysrhythmias
+
+
+Here's also the TOP 10 of 5 digit ICD codes:
+
+    ICD 5   Freq. Name
+    786.09  13.3  Other respiratory abnormalities
+    786.50  12.8% Chest pain, unspecified
+    786.05  11.2% Shortness of breath
+    780.79  7.4%  Other malaise and fatigue
+    780.09  6.4%  Other alteration of consciousness
+    780.02  6.0%  Transient alteration of awareness
+    078.02  4.6%  Syncope and collapse
+    789.00  4.5%  Abdominal pain, unspecified site
+    780.97  3.9%  Altered mental status
+    078.04  3.7%  Dizziness and giddiness
+
+All in all, seems like plausible reasons to call an ambulance while not having super specific diagnostic codes.
+\end{markdown}
+
+\end{document}
